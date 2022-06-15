@@ -2,6 +2,8 @@
 
 [IR A DEMO](https://nerdflix-burnoutzerotest-bertonatimarco.netlify.app/).
 
+![alt-text](https://github.com/marcobertonati/burnoutzero_bertonatimarco/blob/main/app-show.gif)
+
 ## Tecnologías utilizadas
 
 * ReactJs
