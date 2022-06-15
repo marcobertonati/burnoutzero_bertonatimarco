@@ -20,6 +20,8 @@ const mapStateToProps = (state) => {
 	};
 };
 
+
+
 function MoviesContainer({ getMoviesRedux, movies }) {
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(true);
