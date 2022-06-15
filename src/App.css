@@ -1,38 +1,64 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+
+/* COMPONENT: HEADER */
+#header {
+	background-color: #7877f7;
+	padding: 0.1rem;
+	box-shadow: 2px 6px 9px 1px rgba(0, 0, 0, 0.2);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+	font-family: 'Fjalla One', sans-serif;
+	color: #d6fefe;
+	font-size: 3em;
+
+	padding: 0.5rem 0rem;
+
+	overflow: hidden;
+	border-right: 0.15em solid #7877f7;
+	white-space: nowrap;
+	margin: 0 auto;
+	letter-spacing: 0.15em;
+	animation: typing 3.5s steps(40, end) infinite;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Typing effect */
+@keyframes typing {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
+	}
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* COMPONENT: LOADING SPINING */
+.circular-progress {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
-.App-link {
-  color: #61dafb;
+/* COMPONENT: TABLE MOVIES */
+
+h2 {
+	color: #57acfc;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.MuiDataGrid-columnHeaders {
+	background-color: #57acfc;
+	color: #ffffff;
+}
+
+/* COMPONENT: RETRIVE FETCH */
+.retrive-fetch {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.MuiButton-root {
+	width: 100%;
 }

@@ -1,56 +1,81 @@
 /* Modules */
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import getMoviesRedux from '../store/movies/action';
+import PropTypes from 'prop-types';
 
 /* Components */
-import Movies from "../components/movies";
-import RetriveFetch from "../components/retriveFetch";
-import LoadingSping from "../components/loading.spin";
+import Movies from '../components/movies';
+import RandomMovie from '../components/randomMovie';
+import RetriveFetch from '../components/retriveFetch';
+import LoadingSping from '../components/loading.spin';
 
 /* Services */
-import { getMovies } from "../services/movies.services";
-import intentionalError from "../error/intentionalError";
+import { getMovies } from '../services/movies.services';
+import intentionalError from '../error/intentionalError';
 
-export default function MoviesContainer() {
-  const [movies, setMovies] = useState([]);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
+const mapStateToProps = (state) => {
+	return {
+		movies: state.getMoviesReducer.movies,
+	};
+};
 
-  useEffect(() => {
-    if (intentionalError()) {
-      fetchMovies();
-    } else {
-      console.log("An error ocurred!");
-      setLoading(false);
-      setError("No fetching data!");
-    }
-  }, []);
+function MoviesContainer({ getMoviesRedux, movies }) {
+	const [error, setError] = useState('');
+	const [loading, setLoading] = useState(true);
+	useEffect(() => {
+		if (intentionalError()) {
+			fetchMovies();
+		} else {
+			console.log('An error ocurred!');
+			setLoading(false);
+			setError('No fetching data!');
+		}
+	}, []);
 
-  /* Function that fetch movies and set differents states */
-  const fetchMovies = () => {
-    getMovies()
-      .then((data) => {
-        setMovies(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(true);
-        setError("Error fetching data!");
-      });
-  };
+	
+	const fetchMovies = () => {
+		getMovies()
+			.then((data) => {
+				setLoading(false);
+				getMoviesRedux(data);
+			})
+			.catch((err) => {
+				console.log(err);
+				setLoading(true);
+				setError('Error fetching data!');
+			});
+	};
 
-  /* RENDERS */
+	const randomMovie = () => {
+		return movies[Math.floor(Math.random()*1000 + 1)]
+	}
 
-  // Loading
-  if (loading) {
-    return <LoadingSping />;
-  }
+	/* RENDERS */
 
-  // Data fetched
-  if (movies.length > 0) {
-    return <Movies movies={movies} />;
-  }
+	// Loading
+	if (loading) {
+		return <LoadingSping />;
+	}
 
-  // Intentional error
-  return <RetriveFetch error={error} fetchMovies={fetchMovies} />;
+	// Data fetched
+	if (movies) {
+		return (
+			<>
+				<Movies movies={movies} />
+				<RandomMovie randomMovie={randomMovie()} />
+			</>
+		);
+	}
+
+	// Intentional error
+	return <RetriveFetch error={error} fetchMovies={fetchMovies} />;
 }
+
+/* Validate proptypes */
+MoviesContainer.propTypes = {
+	getMoviesRedux: PropTypes.func,
+	movies: PropTypes.array,
+};
+
+export default connect(mapStateToProps, { getMoviesRedux })(MoviesContainer);

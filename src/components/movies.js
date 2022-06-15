@@ -10,19 +10,19 @@ export default function Movies({ movies }) {
 		{
 			field: 'overview',
 			headerName: 'OVERVIEW',
-			flex: 1.75,
+			flex: 1.55,
 		},
 		{
 			field: 'original_language',
 			headerName: 'ORIGINAL LENGUAGE',
-			flex: 0.25,
+			flex: 0.45,
 		},
 	];
 
 	return (
 		<>
 			<Container>
-				<h2 style={{ textAlign: 'center' }}>MOVIES CATALOGUE</h2>
+				<h2 style={{ textAlign: 'center' }}>MOVIES CATALOGUE 🍿</h2>
 
 				<div style={{ height: '70vh', width: '100%' }}>
 					<DataGrid

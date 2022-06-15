@@ -6,7 +6,7 @@ export default function LoadingSping() {
   return (
     <Container>
       <Box sx={{ display: "flex" }}>
-        <CircularProgress />
+        <CircularProgress className="circular-progress" size={100}/>
       </Box>
     </Container>
   );
