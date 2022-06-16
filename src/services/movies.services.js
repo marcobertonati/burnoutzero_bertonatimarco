@@ -19,22 +19,22 @@ function pagesCalled() {
 export async function getMovies() {
 	console.log('Get movies!');
 
-	const endpointsToFetch = pagesCalled();
-
 	try {
-		const data = await axios
-			.all(endpointsToFetch.map((endpoint) => axios.get(endpoint)))
-			.then((response) => {
-				let moviesToSet = [];
-				response.forEach((movie) => {
-					moviesToSet = [...moviesToSet, ...movie.data.results];
-				});
-				const moviesToSetMappedWithIndex = moviesToSet.map((movie, index) => ({
-					...movie,
-					numberMovie: index + 1,
-				}));
-				return moviesToSetMappedWithIndex;
-			});
+		const endpointsToFetch = pagesCalled();
+		
+		const arrayOfAxiosPromises = endpointsToFetch.map((endpoint) =>
+			axios.get(endpoint),
+		);
+		const response = await axios.all(arrayOfAxiosPromises);
+
+		const data = response
+			.map((movie) => movie.data.results)
+			.flat()
+			.map((movie, index) => ({
+				...movie,
+				numberMovie: index + 1,
+			}));
+
 		return data;
 	} catch (error) {
 		console.log(error);

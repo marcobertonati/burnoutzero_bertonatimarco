@@ -46,6 +46,15 @@ h2 {
 	color: #57acfc;
 }
 
+.movies-catalogue {
+	text-align: center;
+}
+
+.table-container {
+	height: 70vh;
+	width: 100%;
+}
+
 .MuiDataGrid-columnHeaders {
 	background-color: #57acfc;
 	color: #ffffff;
